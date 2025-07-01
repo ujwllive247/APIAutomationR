@@ -1,0 +1,22 @@
+name: Run Integration Test
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  integration-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Run BookingIntegrationTest.java only
+        run: mvn -Dtest=BookingIntegrationTest test
